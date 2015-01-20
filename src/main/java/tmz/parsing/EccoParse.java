@@ -115,7 +115,7 @@ public class EccoParse {
                 }
             }
         }
-        //writeDB(items, prices);
+        writeDB(items, prices);
     }
     private static void printPrices(String scu, String category) throws IOException {
         try {
