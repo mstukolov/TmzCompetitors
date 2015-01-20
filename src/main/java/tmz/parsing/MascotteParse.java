@@ -48,12 +48,12 @@ public class MascotteParse {
 
         urls.add(mens);
         urls.add(mBags);
-        urls.add(mAccessories);
-        urls.add(mAccompanying);
+        //urls.add(mAccessories);
+        //urls.add(mAccompanying);
         urls.add(womens);
         urls.add(wBags);
-        urls.add(wAccessories);
-        urls.add(wAccompanying);
+        //urls.add(wAccessories);
+        //urls.add(wAccompanying);
 
         for(String url : urls){
 
@@ -67,7 +67,7 @@ public class MascotteParse {
             if(activePage != null){parsePage("https://shop.mascotte.ru" + activePage.attr("href"));}
             //else{parsePage(url);}
         }
-        //writeDB(items, prices);
+        writeDB(items, prices);
     }
     public static String goNextPage(String url) throws IOException {
         Document document = Jsoup.connect(url).timeout(100 * 10000000).get();

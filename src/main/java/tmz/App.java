@@ -31,8 +31,8 @@ public class App {
         //System.setProperty("sun.net.client.defaultConnectTimeout", "30000000");
 
 
-        CarloPazoliniParse carloPazoliniParse = new CarloPazoliniParse();
-        carloPazoliniParse.run();
+//        CarloPazoliniParse carloPazoliniParse = new CarloPazoliniParse();
+//        carloPazoliniParse.run();
 
         MascotteParse mascotteParse = new MascotteParse();
         mascotteParse.run();
