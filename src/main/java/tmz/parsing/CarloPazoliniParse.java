@@ -40,24 +40,24 @@ public class CarloPazoliniParse {
         System.out.println("Start parse Carlo Pazolini..");
 
         String mens = "http://www.carlopazolini.com/ru/collection/men/shoes?all=1";
-//        String mBags = "http://www.carlopazolini.com/ru/collection/men/bags?all=1";
-//        String mAccessories = "http://www.carlopazolini.com/ru/collection/men/leather-accessories?all=1";
-//        String mAccompanying = "http://www.carlopazolini.com/ru/collection/men/accompanying-goods?all=1";
+        String mBags = "http://www.carlopazolini.com/ru/collection/men/bags?all=1";
+        String mAccessories = "http://www.carlopazolini.com/ru/collection/men/leather-accessories?all=1";
+        String mAccompanying = "http://www.carlopazolini.com/ru/collection/men/accompanying-goods?all=1";
 
         String womens = "http://www.carlopazolini.com/ru/collection/women/shoes/pumps/";
-//        String wBags = "http://www.carlopazolini.com/ru/collection/women/handbags?all=1";
-//        String wAccessories = "http://www.carlopazolini.com/ru/collection/women/leather-accessories?all=1";
-//        String wAccompanying = "http://www.carlopazolini.com/ru/collection/women/accompanying-goods?all=1";
+        String wBags = "http://www.carlopazolini.com/ru/collection/women/handbags?all=1";
+        String wAccessories = "http://www.carlopazolini.com/ru/collection/women/leather-accessories?all=1";
+        String wAccompanying = "http://www.carlopazolini.com/ru/collection/women/accompanying-goods?all=1";
 
         urls.add(mens);
-//        urls.add(mBags);
-//        urls.add(mAccessories);
-//        urls.add(mAccompanying);
+        urls.add(mBags);
+        urls.add(mAccessories);
+        urls.add(mAccompanying);
         urls.add(womens);
 
-//        urls.add(wBags);
-//        urls.add(wAccessories);
-//        urls.add(wAccompanying);
+        urls.add(wBags);
+        urls.add(wAccessories);
+        urls.add(wAccompanying);
 
         //docs.add(Jsoup.connect("http://www.carlopazolini.com/ru/collection/?search=-").timeout(10 * 10000).get());
 
@@ -82,7 +82,7 @@ public class CarloPazoliniParse {
                 }
             }
         }
-        //writeDB(items, prices);
+        writeDB(items, prices);
         printErrors();
     }
     private static void printPrices(String scu, String category) throws IOException {
@@ -101,14 +101,16 @@ public class CarloPazoliniParse {
 
         Elements  pElems = docSCU.select("div.collapse-area > p");
 
-        parseElements(item, kindshoes, Integer.valueOf(price.split(" ")[0]), category, pElems);
+        parseElements(item, kindshoes, Integer.valueOf(price.split(" ")[0]),
+                                       Integer.valueOf(priceFirst.split(" ")[0]), category, pElems);
 
         i++;
         System.out.println("SCU #: " + item + " , " + Integer.valueOf(price.split(" ")[0])
                                             + " , " + Integer.valueOf(priceFirst.split(" ")[0]) + " , "+ i);
     }
     public static void parseElements(String scu, String kindshoes,
-                                       Integer price, String category, Elements pElems) throws UnsupportedEncodingException {
+                                       Integer price,Integer priceFirst,
+                                       String category, Elements pElems) throws UnsupportedEncodingException {
         String upperMaterial = new String("Материал верха".getBytes("UTF8"));
         String soleMaterial = new String("Материал подошвы".getBytes("UTF8"));
         String liningMaterial = new String("Материал подкладки".getBytes("UTF8"));
@@ -127,7 +129,8 @@ public class CarloPazoliniParse {
                 new PricesCompetitors("CarloPazolini",  //Бренд
                                       scu,              //Артикул
                                       new Date(),       //Дата цены
-                                      price             //цена
+                                      price,            //цена
+                                      priceFirst        //Первая цена
                 );
 
         InventTable inventTable =
