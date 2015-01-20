@@ -120,14 +120,15 @@ public class MascotteParse {
         Element table = docSCU.select("table").get(0); //select the first table.
         Elements  pElems = table.select("tr");
 
-        parseElements(item, kindshoes, Integer.valueOf(price), category, pElems);
+        parseElements(item, kindshoes, Integer.valueOf(price), Integer.valueOf(priceFirst), category, pElems);
 
         i++;
         System.out.println("SCU #: " + item + " , " + Integer.valueOf(price.split(" ")[0])
                 + " , " + Integer.valueOf(priceFirst.split(" ")[0]) + " , "+ i);
     }
     public static void parseElements(String scu, String kindshoes,
-                                       Integer price, String category, Elements pElems) throws UnsupportedEncodingException {
+                                       Integer price, Integer priceFirst,
+                                       String category, Elements pElems) throws UnsupportedEncodingException {
         String upperMaterial = new String("Материал".getBytes("UTF8"));
         String soleMaterial = new String("Материал подошвы".getBytes("UTF8"));
         String liningMaterial = new String("Материал подкладки".getBytes("UTF8"));
@@ -150,7 +151,8 @@ public class MascotteParse {
                 new PricesCompetitors("Mascotte",  //Бренд
                                       scu,              //Артикул
                                       new Date(),       //Дата цены
-                                      price             //цена
+                                      price,             //цена
+                                      priceFirst        //Первая цена
                 );
         InventTable inventTable =
                 new InventTable(scu,
@@ -167,7 +169,7 @@ public class MascotteParse {
 
         System.out.println("SCU #: " + inventTable.getScu() + ","  + inventTable.getCategory() + ",#" + i);
         items.add(inventTable);
-        //prices.add(nPrice);
+        prices.add(nPrice);
     }
 
     public void writeDB(List<InventTable> items, List<PricesCompetitors> prices){

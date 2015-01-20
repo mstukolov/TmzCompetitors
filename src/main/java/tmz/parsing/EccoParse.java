@@ -134,7 +134,7 @@ public class EccoParse {
 
             Elements pElems = docSCU.select("div.main > dl");
 
-            parseElements(item, kindshoes, Integer.valueOf(price), category, pElems);
+            parseElements(item, kindshoes, Integer.valueOf(price), Integer.valueOf(priceFirst), category, pElems);
 
             i++;
             System.out.println("SCU #: " + item + " , " + Integer.valueOf(price.split(" ")[0])
@@ -143,7 +143,8 @@ public class EccoParse {
         }catch (java.net.SocketException ex){System.out.println("java.net.SocketException: Connection reset");}
     }
     public static void parseElements(String scu, String kindshoes,
-                                       Integer price, String category, Elements pElems) throws UnsupportedEncodingException {
+                                       Integer price, Integer priceFirst,
+                                       String category, Elements pElems) throws UnsupportedEncodingException {
         String upperMaterial = new String("Верх".getBytes("UTF8"));
         String soleMaterial = new String("Подошва".getBytes("UTF8"));
         String liningMaterial = new String("Подкладка".getBytes("UTF8"));
@@ -163,7 +164,8 @@ public class EccoParse {
                 new PricesCompetitors("Ecco",  //Бренд
                                       scu,              //Артикул
                                       new Date(),       //Дата цены
-                                      price             //цена
+                                      price,            //цена
+                                      priceFirst        //Первая цена
                 );
 
         InventTable inventTable =
