@@ -22,11 +22,9 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="TmzCompetitors" />
+        <module name="competitorprices" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="TmzCompetitors" target="1.7" />
-    </bytecodeTargetLevel>
   </component>
 </project>
+

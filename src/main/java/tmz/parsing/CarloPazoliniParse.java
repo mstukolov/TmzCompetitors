@@ -39,25 +39,25 @@ public class CarloPazoliniParse {
 
         System.out.println("Start parse Carlo Pazolini..");
 
-        String mens = "http://www.carlopazolini.com/ru/collection/men/shoes?all=1";
-        String mBags = "http://www.carlopazolini.com/ru/collection/men/bags?all=1";
-        String mAccessories = "http://www.carlopazolini.com/ru/collection/men/leather-accessories?all=1";
+
+        String mens = "http://www.carlopazolini.com/ru/collection/men/shoes?all=1&season=SS15";
+        String mBags = "http://www.carlopazolini.com/ru/collection/men/bags?all=1&season=SS15";
+        String mAccessories = "http://www.carlopazolini.com/ru/collection/men/leather-accessories?all=1&season=SS15 ";
         String mAccompanying = "http://www.carlopazolini.com/ru/collection/men/accompanying-goods?all=1";
 
-        String womens = "http://www.carlopazolini.com/ru/collection/women/shoes/pumps/";
-        String wBags = "http://www.carlopazolini.com/ru/collection/women/handbags?all=1";
+        String womens = "http://www.carlopazolini.com/ru/collection/women/shoes?all=1&season=SS15";
+        String wBags = "http://www.carlopazolini.com/ru/collection/women/handbags?all=1&season=SS15";
         String wAccessories = "http://www.carlopazolini.com/ru/collection/women/leather-accessories?all=1";
         String wAccompanying = "http://www.carlopazolini.com/ru/collection/women/accompanying-goods?all=1";
 
-        urls.add(mens);
-        urls.add(mBags);
-        urls.add(mAccessories);
-        urls.add(mAccompanying);
-        urls.add(womens);
-
-        urls.add(wBags);
-        urls.add(wAccessories);
-        urls.add(wAccompanying);
+       urls.add(mens);
+       urls.add(mBags);
+       urls.add(mAccessories);
+       urls.add(mAccompanying);
+       urls.add(womens);
+       urls.add(wBags);
+       urls.add(wAccessories);
+       urls.add(wAccompanying);
 
         //docs.add(Jsoup.connect("http://www.carlopazolini.com/ru/collection/?search=-").timeout(10 * 10000).get());
 
@@ -96,8 +96,8 @@ public class CarloPazoliniParse {
 
         //STUM 16.01.2015 Добавление зачеркнутой(первой) цены
             try {
-                priceFirst = docSCU.select("p.price.size15").first().text();
-            }catch(NullPointerException ex){priceFirst = "0";}
+                priceFirst = docSCU.select("div.col-md-5 > p.price.size15").first().text();
+            }catch(NullPointerException ex){priceFirst = price;}
 
         Elements  pElems = docSCU.select("div.collapse-area > p");
 

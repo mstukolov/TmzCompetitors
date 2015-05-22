@@ -1,5 +1,6 @@
 package tmz.parsing;
 
+import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -14,9 +15,7 @@ import tmz.service.PricesCompetitorsService;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 
 public class MascotteParse {
@@ -28,49 +27,80 @@ public class MascotteParse {
     public static List<InventTable> items = new ArrayList<InventTable>();
     public static List<PricesCompetitors> prices = new ArrayList<PricesCompetitors>();
 
+    public static Map<String,String> cookiesMap = new HashMap();
+
     public void run() throws IOException {
 
         List<String> urls = new ArrayList<String>();
 
         System.out.println("Start parse MASCOTTE...");
 
+        String main = "https://shop.mascotte.ru/";
 
-        String mens = "https://shop.mascotte.ru/obuv/dlya-muzhchin";
-        String mBags = "https://shop.mascotte.ru/sumki/dlya-muzhchin/";
-        String mAccessories = "https://shop.mascotte.ru/aksessuari/dlya-muzhchin/";
+//        String mens = "https://shop.mascotte.ru/obuv/dlya-muzhchin/vesna-leto-2015";
+        String mBags = "https://shop.mascotte.ru/sumki/dlya-muzhchin/vesna-leto-2015";
+        String mAccessories = "https://shop.mascotte.ru/aksessuari/dlya-muzhchin/vesna-leto-2015";
         String mAccompanying = "https://shop.mascotte.ru/aksessuary-dlya-obuvi/dlya-muzhchin/";
 
-        String womens = "https://shop.mascotte.ru/obuv/dlya-zhenshchin";
-        String wBags = "https://shop.mascotte.ru/sumki/dlya-zhenshchin/";
-        String wAccessories = "https://shop.mascotte.ru/aksessuari/dlya-zhenshchin/";
+//        String womens = "https://shop.mascotte.ru/obuv/dlya-zhenshchin/vesna-leto-2015";
+        String wBags = "https://shop.mascotte.ru/sumki/dlya-zhenshchin/vesna-leto-2015";
+        String wAccessories = "https://shop.mascotte.ru/aksessuari/dlya-zhenshchin/vesna-leto-2015";
         String wAccompanying = "https://shop.mascotte.ru/aksessuary-dlya-obuvi/dlya-zhenshchin/";
+//
+//        urls.add(mens);
+//        urls.add(womens);
 
-
-        urls.add(mens);
         urls.add(mBags);
-        //urls.add(mAccessories);
-        //urls.add(mAccompanying);
-        urls.add(womens);
+        urls.add(mAccessories);
         urls.add(wBags);
-        //urls.add(wAccessories);
-        //urls.add(wAccompanying);
+        urls.add(wAccessories);
+
+        urls.add(wAccompanying);
+        urls.add(mAccompanying);
+
+        urls.add("https://shop.mascotte.ru/obuv/dlya-zhenshchin/baletki/city597");
+        urls.add("https://shop.mascotte.ru/obuv/dlya-zhenshchin/bosonozhki/city597");
+        urls.add("https://shop.mascotte.ru/obuv/dlya-zhenshchin/botiloni/city597");
+        urls.add("https://shop.mascotte.ru/obuv/dlya-zhenshchin/botinki/city597");
+        urls.add("https://shop.mascotte.ru/obuv/dlya-zhenshchin/mokasini/city597");
+        urls.add("https://shop.mascotte.ru/obuv/dlya-zhenshchin/polubotinki/city597");
+        urls.add("https://shop.mascotte.ru/obuv/dlya-zhenshchin/sabo/city597");
+        urls.add("https://shop.mascotte.ru/obuv/dlya-zhenshchin/sandalii/city597");
+        urls.add("https://shop.mascotte.ru/obuv/dlya-zhenshchin/sapogi/city597");
+        urls.add("https://shop.mascotte.ru/obuv/dlya-zhenshchin/tufli/city597");
+
+
+        urls.add("https://shop.mascotte.ru/obuv/dlya-muzhchin/botinki/city597");
+        urls.add("https://shop.mascotte.ru/obuv/dlya-muzhchin/mokasini/city597");
+        urls.add("https://shop.mascotte.ru/obuv/dlya-muzhchin/polubotinki/city597");
+        urls.add("https://shop.mascotte.ru/obuv/dlya-muzhchin/sabo/city597");
+        urls.add("https://shop.mascotte.ru/obuv/dlya-muzhchin/sandalii/city597");
+        urls.add("https://shop.mascotte.ru/obuv/dlya-muzhchin/sapogi/city597");
+
+
+        Connection.Response res = Jsoup.connect(main)
+                .method(Connection.Method.POST)
+                .execute();
+
+        cookiesMap.put("PHPSESSID", res.cookie("PHPSESSID"));
+        cookiesMap.put("BPC", "b5fb3eb9a5aaa1f3da01b6f689eace13");
 
         for(String url : urls){
 
             if (url.contains("/dlya-muzhchin")) {category = "мужская";}
             if  (url.contains("/dlya-zhenshchin")){category = "женская";}
 
-            Document document = Jsoup.connect(url).timeout(100 * 10000000).get();
+            Document document = Jsoup.connect(url).cookies(cookiesMap).timeout(100 * 10000000).get();
             Element activePage = document.select("ul.pagination > li.active > a[href]").first();
 
             //parsePage(url);
             if(activePage != null){parsePage("https://shop.mascotte.ru" + activePage.attr("href"));}
-            //else{parsePage(url);}
+            else{parsePage(url);}
         }
         writeDB(items, prices);
     }
     public static String goNextPage(String url) throws IOException {
-        Document document = Jsoup.connect(url).timeout(100 * 10000000).get();
+        Document document = Jsoup.connect(url).cookies(cookiesMap).timeout(100 * 10000000).get();
         Element activePage = document.select("ul.pagination > li.active > a[href]").first();
         Elements pages = document.select("ul.pagination > li > a[href]");
 
@@ -88,8 +118,9 @@ public class MascotteParse {
     private static void parsePage(String url) throws IOException {
             System.out.println("Active page is: " + url);
 
-            Document activePage = Jsoup.connect(url).timeout(100 * 10000000).get();
-            Elements links = activePage.select("a[href].thumbnail");
+            Document activePage = Jsoup.connect(url).cookies(cookiesMap).timeout(100 * 10000000).get();
+            Elements links = activePage.select("div > a[href].thumbnail");
+
             for (Element lnk : links) {
                 try {
                      printPrices(lnk.attr("abs:href"), category);
@@ -103,8 +134,8 @@ public class MascotteParse {
     }
     private static void printPrices(String scu, String category) throws IOException {
 
-        Document docSCU = Jsoup.connect(scu).get();
-        String item = "", price = "", priceFirst = "", kindshoes = "";
+        Document docSCU = Jsoup.connect(scu).cookies(cookiesMap).get();
+        String item = "", price = "", priceFirst = "0", kindshoes = "";
 
 
         item = trimArtikul(docSCU.select("ol > li.active").text());
@@ -113,18 +144,23 @@ public class MascotteParse {
 
         //STUM 16.01.2015 Добавление зачеркнутой(первой) цены
         try {
-            priceFirst = docSCU.select("div.old-price").text().replaceAll("\\D", "");
-        }catch(NullPointerException ex){priceFirst = "0";}
+            Elements priceFirstElements = docSCU.select("div.old-price");
+            if(!priceFirstElements.isEmpty()){
+                priceFirst = priceFirstElements.text().replaceAll("\\D", "");
+            }else{priceFirst = price;}
+        }catch(NullPointerException ex){priceFirst = price;}
         //-----------------------------------------------------
 
         Element table = docSCU.select("table").get(0); //select the first table.
         Elements  pElems = table.select("tr");
 
-        parseElements(item, kindshoes, Integer.valueOf(price), Integer.valueOf(priceFirst), category, pElems);
+        try{
 
-        i++;
-        System.out.println("SCU #: " + item + " , " + Integer.valueOf(price.split(" ")[0])
+            parseElements(item, kindshoes, Integer.valueOf(price), Integer.valueOf(priceFirst), category, pElems);
+                i++;
+            System.out.println("SCU #: " + item + " , " + Integer.valueOf(price.split(" ")[0])
                 + " , " + Integer.valueOf(priceFirst.split(" ")[0]) + " , "+ i);
+        }catch (NumberFormatException ex){System.out.println("NumberFormatException for SCU: " + item);}
     }
     public static void parseElements(String scu, String kindshoes,
                                        Integer price, Integer priceFirst,

@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/TmzCompetitors.iml" filepath="$PROJECT_DIR$/TmzCompetitors.iml" />
+      <module fileurl="file://$PROJECT_DIR$/competitorprices.iml" filepath="$PROJECT_DIR$/competitorprices.iml" />
     </modules>
   </component>
 </project>
+

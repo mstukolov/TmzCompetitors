@@ -1,10 +1,7 @@
 package tmz;
 
 
-import tmz.parsing.CarloPazoliniParse;
-import tmz.parsing.EccoParse;
-import tmz.parsing.EconikaParse;
-import tmz.parsing.MascotteParse;
+import tmz.parsing.*;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -31,8 +28,11 @@ public class App {
         //System.setProperty("sun.net.client.defaultConnectTimeout", "30000000");
 
 
-//        CarloPazoliniParse carloPazoliniParse = new CarloPazoliniParse();
-//        carloPazoliniParse.run();
+        ChesterParse chesterParse = new ChesterParse();
+        chesterParse.run();
+
+        CarloPazoliniParse carloPazoliniParse = new CarloPazoliniParse();
+        carloPazoliniParse.run();
 
         MascotteParse mascotteParse = new MascotteParse();
         mascotteParse.run();
@@ -42,13 +42,11 @@ public class App {
 
         EconikaParse econikaParse = new EconikaParse();
         econikaParse.run();
-//
+
         endDate = new Date();
         long totalTime = (endDate.getTime() - startDate.getTime())/(1000);
         System.out.println("End parsing schedule at: " + df.format(endDate));
         System.out.println("Total time: " + totalTime);
-
-
     }
 
 }

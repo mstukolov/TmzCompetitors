@@ -37,8 +37,18 @@ public class EconikaParse {
 
         System.out.println("Start parse Econika..");
 
-        String shoes = "http://econika.ru/catalog/shoes/im?per_page=5000";
+        //String shoes = "http://econika.ru/catalog/shoes/im?per_page=5000";
+        //urls.add(shoes);
+
+        String shoes = "http://econika.ru/catalog/shoes/vesna_leto_2015/rr?per_page=all";
+        String fancyleather = "http://econika.ru/catalog/fancyleather/vesna_leto_2015/rr/im";
+        //String accessories = "http://econika.ru/catalog/accessories/vesna_leto_2015/rr?per_page=all";
+        String accessories = "http://econika.ru/catalog/accessories";
+
         urls.add(shoes);
+        urls.add(fancyleather);
+        urls.add(accessories);
+
         category = "женская";
 
         for(String url : urls){
@@ -73,7 +83,7 @@ public class EconikaParse {
         //STUM 16.01.2015 Добавление зачеркнутой(первой) цены-------
         try {
             priceFirst = docSCU.select(".price-old").first().text().split(" ")[0].replaceAll("\\D", "");
-        }catch(NullPointerException ex){priceFirst = "0";}
+        }catch(NullPointerException ex){priceFirst = price;}
         //-----------------------------------------------------
 
         Elements  pElems = docSCU.select("div.item-attr > dl > dd");

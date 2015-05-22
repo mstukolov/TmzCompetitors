@@ -28,68 +28,41 @@ public class EccoParse {
     public static List<InventTable> items = new ArrayList<InventTable>();
     public static List<PricesCompetitors> prices = new ArrayList<PricesCompetitors>();
 
+
     public void run() throws IOException {
 
         List<String> urls = new ArrayList<String>();
 
         System.out.println("Start parse Ecco...");
 
-        String mBoots = "http://www.ecco-shoes.ru/men/shoes/boots/?newcollection=all&&pr=1&c=cl#ch";
-        String mHome = "http://www.ecco-shoes.ru/men/shoes/home/?newcollection=all&&pr=1&c=cl#ch";
-        String mSneakers = "http://www.ecco-shoes.ru/men/shoes/sneakers/?newcollection=all&&pr=1&c=cl#ch";
-        String mMoccasins = "http://www.ecco-shoes.ru/men/shoes/moccasins/?newcollection=all&&pr=1&c=cl#ch";
-        String mLowshoes = "http://www.ecco-shoes.ru/men/shoes/lowshoes/?newcollection=all&&pr=1&c=cl#ch";
-        String mSandal = "http://www.ecco-shoes.ru/men/shoes/sandal/?newcollection=all&&pr=1&c=cl#ch";
-        String mShoe = "http://www.ecco-shoes.ru/men/shoes/shoe/?newcollection=all&&pr=1&c=cl#ch";
+        String women = "http://www.ecco-shoes.ru/women/shoes/all/?newcollection=1&type=3937,3970,4117,3922,5409,3912,4059&&c=cl#ch";
+        String women2 = "http://www.ecco-shoes.ru/women/shoes/all/?newcollection=1&type=3882,3958,3908,3941&&c=cl#ch";
+        String women3 = "http://www.ecco-shoes.ru/women/shoes/all/?newcollection=1&type=3980,3982&&c=cl#ch";
 
-        String ballerinas = "http://www.ecco-shoes.ru/women/shoes/ballerinas/?newcollection=all&&pr=1&c=cl#ch";
-        String ankle = "http://www.ecco-shoes.ru/women/shoes/ankle/?newcollection=all&&pr=1&c=cl#ch";
-        String boots = "http://www.ecco-shoes.ru/women/shoes/boots/?newcollection=all&&pr=1&c=cl#ch";
-        String home = "http://www.ecco-shoes.ru/women/shoes/home/?newcollection=all&&pr=1&c=cl#ch";
-        String sneakers = "http://www.ecco-shoes.ru/women/shoes/sneakers/?newcollection=all&&pr=1&c=cl#ch";
-        String lowshoes = "http://www.ecco-shoes.ru/women/shoes/lowshoes/?newcollection=all&&pr=1&c=cl#ch";
-        String lowboots = "http://www.ecco-shoes.ru/women/shoes/lowboots/?newcollection=all&&pr=1&c=cl#ch";
-        String sandal = "http://www.ecco-shoes.ru/women/shoes/sandal/?newcollection=all&&pr=1&c=cl#ch";
-        String highboots = "http://www.ecco-shoes.ru/women/shoes/highboots/?newcollection=all&&pr=1&c=cl#ch";
-        String shoe = "http://www.ecco-shoes.ru/women/shoes/shoe/?newcollection=all&&pr=1&c=cl#ch";
 
-        String boys = "http://www.ecco-shoes.ru/kids/boys/?newcollection=all&&pr=1&c=cl#ch";
-        String girls = "http://www.ecco-shoes.ru/kids/girls/?newcollection=all&&pr=1&c=cl#ch";
-        String infants = "http://www.ecco-shoes.ru/kids/infants/?newcollection=all&&pr=1&c=cl#ch";
+        String men = "http://www.ecco-shoes.ru/men/shoes/all/?newcollection=1&type=3922,5409,3912,4059&&c=cl#ch";
+        String men2 = "http://www.ecco-shoes.ru/men/shoes/all/?newcollection=1&type=3882&&n=1&c=cl#ch";
+        String men3 = "http://www.ecco-shoes.ru/men/shoes/all/?newcollection=1&type=3908,3980&&n=1&c=cl#ch";
 
-        String bags = "http://www.ecco-shoes.ru/accessories/bags/?newcollection=all&&pr=1&c=cl#ch";
-        String wallets = "http://www.ecco-shoes.ru/accessories/wallets/?newcollection=all&&pr=1&c=cl#ch";
-        String belts = "http://www.ecco-shoes.ru/accessories/belts/?newcollection=all&&pr=1&c=cl#ch";
-        String other = "http://www.ecco-shoes.ru/accessories/other/?newcollection=all&&pr=1&c=cl#ch";
+        String bags = "http://www.ecco-shoes.ru/accessories/bags/?newcollection=1&&c=cl#ch";
+        String wallets = "http://www.ecco-shoes.ru/accessories/wallets/?newcollection=1&&c=cl#ch";
+        String accessories = "http://www.ecco-shoes.ru/accessories/belts/?newcollection=1&&c=cl#ch";
 
-        urls.add(mBoots);
-        urls.add(mHome);
-        urls.add(mSneakers);
-        urls.add(mMoccasins);
-        urls.add(mLowshoes);
-        urls.add(mSandal);
-        urls.add(mShoe);
+//        String womenAccessories = "http://www.ecco-shoes.ru/women/accessories/?newcollection=1&&c=cl#ch";
+//        String menAccessories = "http://www.ecco-shoes.ru/men/accessories/?newcollection=1&&c=cl#ch";
 
-        urls.add(ballerinas);
-        urls.add(ankle);
-        urls.add(boots);
-        urls.add(home);
 
-        urls.add(sneakers);
-        urls.add(lowshoes);
-        urls.add(lowboots);
-        urls.add(sandal);
-        urls.add(highboots);
-        urls.add(shoe);
+        urls.add(women);
+        urls.add(women2);
+        urls.add(women3);
 
-        urls.add(boys);
-        urls.add(girls);
-        urls.add(infants);
+        urls.add(men);
+        urls.add(men2);
+        urls.add(men3);
 
         urls.add(bags);
         urls.add(wallets);
-        urls.add(belts);
-        urls.add(other);
+        urls.add(accessories);
 
 
 
@@ -122,14 +95,14 @@ public class EccoParse {
             Document docSCU = Jsoup.connect(scu).get();
             String item = "", price = "", priceFirst = "", kindshoes = "";
 
-            kindshoes = docSCU.select("#model_container > h1 > span").first().text();
+            kindshoes = docSCU.select("#model_container > h1").first().text().split("\\s")[0];
             item = trimElement(docSCU.select("div.block > p.art").first().text());
             price = docSCU.select("dd.new").first().text().replaceAll("\\Dруб.*", "");
 
             //STUM 16.01.2015 Добавление зачеркнутой(первой) цены-------
             try {
                 priceFirst = docSCU.select("dd.old").first().text().replaceAll("\\Dруб.*", "");
-            }catch(NullPointerException ex){priceFirst = "0";}
+            }catch(NullPointerException ex){priceFirst = price;}
             //-----------------------------------------------------
 
             Elements pElems = docSCU.select("div.main > dl");
@@ -138,7 +111,7 @@ public class EccoParse {
 
             i++;
             System.out.println("SCU #: " + item + " , " + Integer.valueOf(price.split(" ")[0])
-                    + " , " + Integer.valueOf(priceFirst.split(" ")[0]) + " , "+ i);
+                    + " , " + Integer.valueOf(priceFirst.split(" ")[0]) + " , "+"," + kindshoes + ","+ i);
 
         }catch (java.net.SocketException ex){System.out.println("java.net.SocketException: Connection reset");}
     }
@@ -169,7 +142,7 @@ public class EccoParse {
                 );
 
         InventTable inventTable =
-                new InventTable(scu,
+                new InventTable(scu.replaceAll(" ", ""),
                                 "Ecco",
                                 new String(category.getBytes(),"utf-8"),
                                 kindshoes,
@@ -207,7 +180,7 @@ public class EccoParse {
     }
     public static String  trimElement(String s){
 
-        return s.substring(s.lastIndexOf(":") + 1);
+        return (s.substring(s.lastIndexOf(":") + 1)).replaceAll(" ", "");
     }
 
 }
