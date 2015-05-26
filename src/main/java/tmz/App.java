@@ -28,8 +28,8 @@ public class App {
         //System.setProperty("sun.net.client.defaultConnectTimeout", "30000000");
 
 
-        ChesterParse chesterParse = new ChesterParse();
-        chesterParse.run();
+//        ChesterParse chesterParse = new ChesterParse();
+//        chesterParse.run();
 
         CarloPazoliniParse carloPazoliniParse = new CarloPazoliniParse();
         carloPazoliniParse.run();

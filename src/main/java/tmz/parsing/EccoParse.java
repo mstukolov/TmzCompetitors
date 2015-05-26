@@ -35,36 +35,47 @@ public class EccoParse {
 
         System.out.println("Start parse Ecco...");
 
-        String women = "http://www.ecco-shoes.ru/women/shoes/all/?newcollection=1&type=3937,3970,4117,3922,5409,3912,4059&&c=cl#ch";
-        String women2 = "http://www.ecco-shoes.ru/women/shoes/all/?newcollection=1&type=3882,3958,3908,3941&&c=cl#ch";
-        String women3 = "http://www.ecco-shoes.ru/women/shoes/all/?newcollection=1&type=3980,3982&&c=cl#ch";
+        String ballerinas = "http://www.ecco-shoes.ru/women/shoes/ballerinas/?newcollection=1&&c=cl#ch";
+        String sandals = "http://www.ecco-shoes.ru/women/shoes/sandals/?newcollection=1&&c=cl#ch";
+        String ankle = "http://www.ecco-shoes.ru/women/shoes/ankle/?newcollection=1&&c=cl#ch";
+        String boots = "http://www.ecco-shoes.ru/women/shoes/boots/?newcollection=1&&c=cl#ch";
+        String sneakers = "http://www.ecco-shoes.ru/women/shoes/sneakers/?newcollection=1&&c=cl#ch";
+        String moccasins = "http://www.ecco-shoes.ru/women/shoes/moccasins/?newcollection=1&&c=cl#ch";
+        String lowshoes = "http://www.ecco-shoes.ru/women/shoes/lowshoes/?newcollection=1&&c=cl#ch";
+        String sandal = "http://www.ecco-shoes.ru/women/shoes/sandal/?newcollection=1&&c=cl#ch";
+        String shoe = "http://www.ecco-shoes.ru/women/shoes/shoe/?newcollection=1&&c=cl#ch";
 
 
-        String men = "http://www.ecco-shoes.ru/men/shoes/all/?newcollection=1&type=3922,5409,3912,4059&&c=cl#ch";
-        String men2 = "http://www.ecco-shoes.ru/men/shoes/all/?newcollection=1&type=3882&&n=1&c=cl#ch";
-        String men3 = "http://www.ecco-shoes.ru/men/shoes/all/?newcollection=1&type=3908,3980&&n=1&c=cl#ch";
+        String _boots = "http://www.ecco-shoes.ru/men/shoes/boots/?newcollection=1&&c=cl#ch";
+        String _sneakers = "http://www.ecco-shoes.ru/men/shoes/sneakers/?newcollection=1&&c=cl#ch";
+        String _moccasins = "http://www.ecco-shoes.ru/men/shoes/moccasins/?newcollection=1&&c=cl#ch";
+        String _lowshoes = "http://www.ecco-shoes.ru/men/shoes/lowshoes/?newcollection=1&&c=cl#ch";
+        String _sandal = "http://www.ecco-shoes.ru/men/shoes/sandal/?newcollection=1&&c=cl#ch";
+        String _shoe = "http://www.ecco-shoes.ru/men/shoes/shoe/?newcollection=1&&c=cl#ch";
 
-        String bags = "http://www.ecco-shoes.ru/accessories/bags/?newcollection=1&&c=cl#ch";
-        String wallets = "http://www.ecco-shoes.ru/accessories/wallets/?newcollection=1&&c=cl#ch";
-        String accessories = "http://www.ecco-shoes.ru/accessories/belts/?newcollection=1&&c=cl#ch";
-
+//        String bags = "http://www.ecco-shoes.ru/accessories/bags/?newcollection=1&&c=cl#ch";
+//        String wallets = "http://www.ecco-shoes.ru/accessories/wallets/?newcollection=1&&c=cl#ch";
+//        String accessories = "http://www.ecco-shoes.ru/accessories/belts/?newcollection=1&&c=cl#ch";
 //        String womenAccessories = "http://www.ecco-shoes.ru/women/accessories/?newcollection=1&&c=cl#ch";
 //        String menAccessories = "http://www.ecco-shoes.ru/men/accessories/?newcollection=1&&c=cl#ch";
 
 
-        urls.add(women);
-        urls.add(women2);
-        urls.add(women3);
+        urls.add(ballerinas);
+        urls.add(sandals);
+        urls.add(ankle);
+        urls.add(boots);
+        urls.add(sneakers);
+        urls.add(moccasins);
+        urls.add(lowshoes);
+        urls.add(sandal);
+        urls.add(shoe);
 
-        urls.add(men);
-        urls.add(men2);
-        urls.add(men3);
-
-        urls.add(bags);
-        urls.add(wallets);
-        urls.add(accessories);
-
-
+        urls.add(_boots);
+        urls.add(_sneakers);
+        urls.add(_moccasins);
+        urls.add(_lowshoes);
+        urls.add(_sandal);
+        urls.add(_shoe);
 
         for(String url : urls){
 
